@@ -2,18 +2,21 @@
 
 ## Project Overview
 
-This project analyzes Air Quality Index (AQI) data for six states where RRE operates: California, Florida, Michigan, Ohio, Pennsylvania, and Texas. The analysis compares average AQI across these states, visualizes the distribution with a Seaborn boxplot, and calculates a 95% confidence interval for the state with the highest mean AQI.
+This project applies descriptive statistics and confidence intervals to Air Quality Index (AQI) data for six states where Ripple Renewable Energy (RRE) operates: California, Florida, Michigan, Ohio, Pennsylvania, and Texas.
 
-## Objectives
+The notebook compares state-level mean AQI, visualizes AQI distributions with a Seaborn boxplot, considers a proposed policy threshold of AQI 10, and estimates a 95% confidence interval for the state with the highest mean AQI.
 
-- Compare mean AQI across the six RRE states.
-- Visualize state-level AQI distributions with a boxplot.
-- Identify which state may be most affected by a policy focused on higher AQI.
-- Estimate a 95% confidence interval for the highest-mean-AQI state.
+## Project Objectives
+
+- Explore and check the AQI dataset.
+- Calculate and compare mean AQI across the six RRE states.
+- Visualize the state-level distributions with a boxplot.
+- Identify which state appears most likely to meet or exceed the policy threshold based on the sample.
+- Calculate and interpret a 95% confidence interval for the highest-mean-AQI state.
 
 ## Key Findings
 
-Mean AQI by state, sorted from highest to lowest:
+The current notebook reports the following mean AQI values, sorted from highest to lowest:
 
 | State | Mean AQI |
 |---|---:|
@@ -24,9 +27,11 @@ Mean AQI by state, sorted from highest to lowest:
 | Pennsylvania | 3.90 |
 | Texas | 3.70 |
 
-California has the highest mean AQI in this analysis.
+California has the highest reported mean AQI among the six states. Its reported mean is above the policy threshold of 10.
 
 ### California: 95% Confidence Interval
+
+The current notebook reports these results for California:
 
 - Sample size: 66 observations
 - Sample mean AQI: 13.12
@@ -35,37 +40,60 @@ California has the highest mean AQI in this analysis.
 - Margin of error: approximately 1.79
 - 95% t-confidence interval: **11.33 to 14.92**
 
-Interpretation: Based on this sample and the t-interval method, the estimated interval for California's population mean AQI is approximately 11.33–14.92.
+**Interpretation:** Under the assumptions of the sampling method, this interval provides a range of plausible values for California's population mean AQI. A confidence interval describes uncertainty around an estimate; it does not show that a policy caused an outcome.
+
+## Dataset Note and Limitations
+
+The notebook's dataset uses the columns `date_local` and `aqi_log`. The AQI values are reconstructed from the log-transformed column using `numpy.exp()`.
+
+The currently supplied CSV contains observations for **January 1, 2018 only**, rather than a time series across multiple dates. Therefore, the results should be treated as a learning exercise based on the available sample, not as evidence of long-term air quality trends or a causal policy impact. Confirm that the dataset is the intended source and rerun the notebook before relying on the reported findings.
 
 ## Tools and Libraries
 
 - Python
-- pandas
+- Pandas
 - NumPy
 - Matplotlib
 - Seaborn
-- SciPy (for statistical calculations, if used in the notebook)
+- SciPy
+- Jupyter Notebook
 
 ## Repository Contents
 
-- `README.md` — project overview, methods, and findings.
-- `requirements.txt` — Python package dependencies.
-- `RRE_AQI_Analysis.html` — exported notebook/report, to be added.
-- `c4_epa_air_quality.csv` — source dataset, to be added.
-- `RRE_AQI_Analysis.ipynb` — editable Jupyter notebook, to be added later.
+| File | Purpose | Status |
+|---|---|---|
+| `RRE_AQI_Analysis.ipynb` | Main notebook containing the analysis, visualizations, and confidence interval calculation | Already in the repository |
+| `requirements.txt` | Python libraries needed to run the notebook | Already in the repository |
+| `README.md` | Project overview, findings, setup instructions, and limitations | This file |
+| `c4_epa_air_quality.csv` | Source dataset required to rerun the notebook | **Needs to be added** |
+| `RRE_AQI_Analysis.html` | Optional HTML export of the notebook for easy viewing in a browser | Optional |
+| `confidence_interval_one_page_guide.pdf` | Optional one-page visual guide to confidence intervals | Optional |
 
-## How to Run
+## How to Run the Project
 
-1. Clone or download this repository.
-2. Install the dependencies:
+1. Download or clone this repository.
+2. Add `c4_epa_air_quality.csv` to the project folder, alongside the notebook.
+3. Install the dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
-3. Open `RRE_AQI_Analysis.ipynb` in Jupyter Notebook or JupyterLab after the notebook is added.
-4. Ensure the CSV dataset is in the expected project folder before running the analysis.
 
-## Notes and Limitations
+4. Open `RRE_AQI_Analysis.ipynb` in Jupyter Notebook or JupyterLab.
+5. Make sure the notebook loads the CSV using a relative path, for example:
 
-- The findings describe the dataset and analysis performed; they do not establish that a policy caused a change in AQI.
-- The policy implication is a data-based interpretation, not a causal estimate.
-- The confidence interval is an estimate based on the available California sample and the t-distribution method.
+   ```python
+   aqi = pd.read_csv("c4_epa_air_quality.csv")
+   ```
+
+6. Run the notebook cells from top to bottom to regenerate the results.
+
+## References
+
+- [Seaborn boxplot documentation](https://seaborn.pydata.org/generated/seaborn.boxplot.html)
+- [Pandas documentation](https://pandas.pydata.org/docs/)
+- [SciPy statistics documentation](https://docs.scipy.org/doc/scipy/reference/stats.html)
+
+---
+
+This is a learning project demonstrating practical use of Python and statistical reasoning. Interpret the results in light of the dataset's coverage and assumptions.
