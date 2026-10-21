@@ -13,6 +13,7 @@ The notebook compares state-level mean AQI, visualizes AQI distributions with a 
 - Visualize the state-level distributions with a boxplot.
 - Identify which state appears most likely to meet or exceed the policy threshold based on the sample.
 - Calculate and interpret a 95% confidence interval for the highest-mean-AQI state.
+- Explain confidence intervals through a visual, beginner-friendly infographic.
 
 ## Key Findings
 
@@ -42,11 +43,17 @@ The current notebook reports these results for California:
 
 **Interpretation:** Under the assumptions of the sampling method, this interval provides a range of plausible values for California's population mean AQI. A confidence interval describes uncertainty around an estimate; it does not show that a policy caused an outcome.
 
+## Confidence Interval Infographic
+
+The repository includes a three-page PDF carousel that explains confidence intervals visually, including the core idea, interpretation, and key statistical concepts.
+
+[**View the three-page Confidence Interval Infographic (PDF)**](confidence_intervals_carousel.pdf)
+
 ## Dataset Note and Limitations
 
 The notebook's dataset uses the columns `date_local` and `aqi_log`. The AQI values are reconstructed from the log-transformed column using `numpy.exp()`.
 
-The currently supplied CSV contains observations for **January 1, 2018 only**, rather than a time series across multiple dates. Therefore, the results should be treated as a learning exercise based on the available sample, not as evidence of long-term air quality trends or a causal policy impact. Confirm that the dataset is the intended source and rerun the notebook before relying on the reported findings.
+The supplied CSV contains observations for **January 1, 2018 only**, rather than a time series across multiple dates. Therefore, the results should be treated as a learning exercise based on the available sample, not as evidence of long-term air quality trends or a causal policy impact. Confirm that the dataset is the intended source and rerun the notebook before relying on the reported findings.
 
 ## Tools and Libraries
 
@@ -60,19 +67,19 @@ The currently supplied CSV contains observations for **January 1, 2018 only**, r
 
 ## Repository Contents
 
-| File | Purpose | Status |
-|---|---|---|
-| `RRE_AQI_Analysis.ipynb` | Main notebook containing the analysis, visualizations, and confidence interval calculation | Already in the repository |
-| `requirements.txt` | Python libraries needed to run the notebook | Already in the repository |
-| `README.md` | Project overview, findings, setup instructions, and limitations | This file |
-| `c4_epa_air_quality.csv` | Source dataset required to rerun the notebook | **Needs to be added** |
-| `RRE_AQI_Analysis.html` | Optional HTML export of the notebook for easy viewing in a browser | Optional |
-| `confidence_interval_one_page_guide.pdf` | Optional one-page visual guide to confidence intervals | Optional |
+| File | Purpose |
+|---|---|
+| `README.md` | Project overview, findings, setup instructions, and limitations |
+| `RRE_AQI_Analysis.ipynb` | Jupyter Notebook containing the analysis, visualizations, and confidence interval calculation |
+| `RRE_AQI_Analysis.html` | HTML export of the notebook for easy viewing in a browser |
+| `c4_epa_air_quality.csv` | Source dataset used by the notebook |
+| `requirements.txt` | Python package dependencies |
+| `confidence_intervals_carousel.pdf` | Three-page visual infographic explaining confidence intervals |
 
 ## How to Run the Project
 
-1. Download or clone this repository.
-2. Add `c4_epa_air_quality.csv` to the project folder, alongside the notebook.
+1. Clone or download this repository.
+2. Ensure `c4_epa_air_quality.csv` is in the same folder as the notebook.
 3. Install the dependencies:
 
    ```bash
@@ -80,13 +87,13 @@ The currently supplied CSV contains observations for **January 1, 2018 only**, r
    ```
 
 4. Open `RRE_AQI_Analysis.ipynb` in Jupyter Notebook or JupyterLab.
-5. Make sure the notebook loads the CSV using a relative path, for example:
+5. Load the dataset using a relative path:
 
    ```python
    aqi = pd.read_csv("c4_epa_air_quality.csv")
    ```
 
-6. Run the notebook cells from top to bottom to regenerate the results.
+6. Run the notebook cells from top to bottom to reproduce the analysis.
 
 ## References
 
